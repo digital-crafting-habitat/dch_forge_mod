@@ -15,7 +15,14 @@ buildscript {
     }
 }
 
+version = "7.0.13"
+
 apply plugin: 'forge'
+apply plugin: 'java'
+compileJava.options.encoding = 'UTF-8'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 version = "1.0"
 group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -40,6 +47,16 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+}
+
+minecraft {
+    version = "1.7.10-10.13.3.1388-1.7.10" // McVersion-ForgeVersion     this variable is later changed to contain only the MC version, while the apiVersion variable is used for the forge version.  Yeah its stupid, and will be changed eentually.
+
+    runDir = "run" // the directory for ForgeGradle to run Minecraft in
+
+    // replacing stuff in the source
+    replace '@VERSION@', project.version
+    replace '@MC_VERSION@', version
 }
 
 processResources
