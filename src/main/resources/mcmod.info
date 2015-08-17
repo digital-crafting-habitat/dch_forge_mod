@@ -8,7 +8,7 @@
   "url": "http://digitalcraftinghabitat.de/",
   "updateUrl": "assets/digitalcraftinghabitat/dch_logo_block.png",
   "authorList": ["DCH Team"],
-  "credits": "The Forge and FML guys, for making this example",
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
