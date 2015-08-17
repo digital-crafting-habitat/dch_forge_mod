@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod;
 
 import com.digitalcraftinghabitat.forgemod.block.BlockCraftium;
+import com.digitalcraftinghabitat.forgemod.block.CraftingLever;
 import com.digitalcraftinghabitat.forgemod.block.EnergyTile;
 import com.digitalcraftinghabitat.forgemod.block.EnergyBlock;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
@@ -28,6 +29,7 @@ public class DigitalCraftingHabitatMod {
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
+        GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
         GameRegistry.registerItem(CraftingHabitatItems.itemCraftium, "craftium");
         GameRegistry.addRecipe(new ItemStack(Items.diamond),

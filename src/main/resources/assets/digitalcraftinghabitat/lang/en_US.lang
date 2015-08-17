@@ -7,6 +7,8 @@ item.craftium_ingot.name=Craftium Ingot
 tile.craftium_tile.name=Craftium Block
 tile.energy_block.name=Crafting Energy Block
 tile.craftium_block.name=Craftium Block
+tile.crafting_lever_block.name=Crafting Lever
 
 block.energy_block.name=Crafting Energy Block
 block.craftium_block.name=Craftium Block
+block.crafting_lever_block.name=Crafting Lever
