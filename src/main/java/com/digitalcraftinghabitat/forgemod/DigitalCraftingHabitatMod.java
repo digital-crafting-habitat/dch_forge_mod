@@ -25,7 +25,7 @@ public class DigitalCraftingHabitatMod {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        // some example code
+        // some example code test
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
