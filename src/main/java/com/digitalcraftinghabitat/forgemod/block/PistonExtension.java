@@ -23,7 +23,7 @@ public class PistonExtension extends BlockPistonExtension {
 
     }
     @SideOnly(Side.CLIENT)
-    public void func_150086_a(IIcon p_150086_1_) {
+  @Override  public void func_150086_a(IIcon p_150086_1_) {
         this.field_150088_a = p_150086_1_;
     }
     @SideOnly(Side.CLIENT)

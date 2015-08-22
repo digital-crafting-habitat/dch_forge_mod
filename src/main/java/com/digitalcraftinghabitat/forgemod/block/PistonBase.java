@@ -50,8 +50,7 @@ public class PistonBase extends BlockPistonBase{
         this.energyTile = energyTile;
     }
 
-    @Override
-    public boolean onBlockActivated(World world, int p_149727_2_,
+    @Override public boolean onBlockActivated(World world, int p_149727_2_,
                                     int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_,
                                     int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         if (world.isRemote){
@@ -68,7 +67,7 @@ public class PistonBase extends BlockPistonBase{
         energyTile = new EnergyTile();
         return energyTile;
     }
-    private static boolean canPushBlock(Block p_150080_0_, World p_150080_1_, int p_150080_2_, int p_150080_3_, int p_150080_4_, boolean p_150080_5_) {
+     private static boolean canPushBlock(Block p_150080_0_, World p_150080_1_, int p_150080_2_, int p_150080_3_, int p_150080_4_, boolean p_150080_5_) {
         if(p_150080_0_ == Blocks.obsidian) {
             return false;
         } else {
@@ -95,7 +94,7 @@ public class PistonBase extends BlockPistonBase{
             return !p_150080_1_.getBlock(p_150080_2_, p_150080_3_, p_150080_4_).hasTileEntity(p_150080_1_.getBlockMetadata(p_150080_2_, p_150080_3_, p_150080_4_));
         }
     }
-     public boolean tryExtend(World p_150079_1_, int p_150079_2_, int p_150079_3_, int p_150079_4_, int p_150079_5_) {
+      private boolean tryExtend(World p_150079_1_, int p_150079_2_, int p_150079_3_, int p_150079_4_, int p_150079_5_) {
         int i1 = p_150079_2_ + Facing.offsetsXForSide[p_150079_5_];
         int j1 = p_150079_3_ + Facing.offsetsYForSide[p_150079_5_];
         int k1 = p_150079_4_ + Facing.offsetsZForSide[p_150079_5_];

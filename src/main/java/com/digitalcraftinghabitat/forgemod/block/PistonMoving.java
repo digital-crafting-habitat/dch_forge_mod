@@ -32,10 +32,10 @@ public PistonMoving(){
         return null;
     }
 
-    public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_) {
+   @Override public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_) {
     }
 
-    public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
+  @Override  public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
         TileEntity tileentity = p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
         if(tileentity instanceof TileEntityPiston) {
             ((TileEntityPiston)tileentity).clearPistonTileEntity();
@@ -45,27 +45,27 @@ public PistonMoving(){
 
     }
 
-    public boolean canPlaceBlockAt(World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_) {
+  @Override  public boolean canPlaceBlockAt(World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_) {
         return false;
     }
 
-    public boolean canPlaceBlockOnSide(World p_149707_1_, int p_149707_2_, int p_149707_3_, int p_149707_4_, int p_149707_5_) {
+   @Override public boolean canPlaceBlockOnSide(World p_149707_1_, int p_149707_2_, int p_149707_3_, int p_149707_4_, int p_149707_5_) {
         return false;
     }
 
-    public int getRenderType() {
+  @Override  public int getRenderType() {
         return -1;
     }
 
-    public boolean isOpaqueCube() {
+  @Override  public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean renderAsNormalBlock() {
+    @Override public boolean renderAsNormalBlock() {
         return false;
     }
 
-    public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    @Override public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         if(!p_149727_1_.isRemote && p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_) == null) {
             p_149727_1_.setBlockToAir(p_149727_2_, p_149727_3_, p_149727_4_);
             return true;
@@ -74,15 +74,15 @@ public PistonMoving(){
         }
     }
 
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+   @Override public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
         return null;
     }
 
-    public void dropBlockAsItemWithChance(World p_149690_1_, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_) {
+   @Override public void dropBlockAsItemWithChance(World p_149690_1_, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_) {
         super.dropBlockAsItemWithChance(p_149690_1_, p_149690_2_, p_149690_3_, p_149690_4_, p_149690_5_, p_149690_6_, p_149690_7_);
     }
 
-    public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
+   @Override public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
         if(!p_149695_1_.isRemote) {
             p_149695_1_.getTileEntity(p_149695_2_, p_149695_3_, p_149695_4_);
         }
@@ -93,7 +93,7 @@ public PistonMoving(){
         return new TileEntityPiston(p_149962_0_, p_149962_1_, p_149962_2_, p_149962_3_, p_149962_4_);
     }
 
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+   @Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
         TileEntityPiston tileentitypiston = this.func_149963_e(p_149668_1_, p_149668_2_, p_149668_3_, p_149668_4_);
         if(tileentitypiston == null) {
             return null;
@@ -107,7 +107,7 @@ public PistonMoving(){
         }
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
+   @Override public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
         TileEntityPiston tileentitypiston = this.func_149963_e(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_);
         if(tileentitypiston != null) {
             Block block = tileentitypiston.getStoredBlockID();
@@ -132,7 +132,7 @@ public PistonMoving(){
 
     }
 
-    public AxisAlignedBB func_149964_a(World p_149964_1_, int p_149964_2_, int p_149964_3_, int p_149964_4_, Block p_149964_5_, float p_149964_6_, int p_149964_7_) {
+   @Override public AxisAlignedBB func_149964_a(World p_149964_1_, int p_149964_2_, int p_149964_3_, int p_149964_4_, Block p_149964_5_, float p_149964_6_, int p_149964_7_) {
         if(p_149964_5_ != this && p_149964_5_.getMaterial() != Material.air) {
             AxisAlignedBB axisalignedbb = p_149964_5_.getCollisionBoundingBoxFromPool(p_149964_1_, p_149964_2_, p_149964_3_, p_149964_4_);
             if(axisalignedbb == null) {
@@ -169,16 +169,16 @@ public PistonMoving(){
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
+    @Override public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
         return Item.getItemById(0);
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
+    @Override public void registerBlockIcons(IIconRegister p_149651_1_) {
         this.blockIcon = p_149651_1_.registerIcon("piston_top_normal");
     }
 
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+   @Override  public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         TileEntityPiston te = this.func_149963_e(world, x, y, z);
         return te != null?te.getStoredBlockID().getDrops(world, x, y, z, te.getBlockMetadata(), 0):new ArrayList();
     }
