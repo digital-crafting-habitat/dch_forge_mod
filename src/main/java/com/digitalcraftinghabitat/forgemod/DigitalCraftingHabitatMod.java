@@ -1,9 +1,6 @@
 package com.digitalcraftinghabitat.forgemod;
 
-import com.digitalcraftinghabitat.forgemod.block.BlockCraftium;
-import com.digitalcraftinghabitat.forgemod.block.CraftingLever;
-import com.digitalcraftinghabitat.forgemod.block.EnergyTile;
-import com.digitalcraftinghabitat.forgemod.block.EnergyBlock;
+import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.item.CraftingHabitatItems;
@@ -13,6 +10,7 @@ import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,6 +25,9 @@ public class DigitalCraftingHabitatMod {
     public void init(FMLInitializationEvent event) {
         // some example code test
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
+        GameRegistry.registerBlock(new PistonBase(false), "crafting_piston");
+        GameRegistry.registerBlock(new PistonExtension(),"piston_moving");
+       GameRegistry.registerBlock( new PistonMoving(),"piston_head");
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
