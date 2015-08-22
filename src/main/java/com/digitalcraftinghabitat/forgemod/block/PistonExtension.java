@@ -27,7 +27,7 @@ public class PistonExtension extends BlockPistonExtension {
         this.field_150088_a = p_150086_1_;
     }
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_getIcon_1_, int p_getIcon_2_) {
+    @Override public IIcon getIcon(int p_getIcon_1_, int p_getIcon_2_) {
         int var3 = getDirectionMeta(p_getIcon_2_);
         return p_getIcon_1_ == var3?(this.field_150088_a != null?this.field_150088_a:((p_getIcon_2_ & 8) != 0?PistonBase.getPistonBaseIcon("piston_top_sticky"):PistonBase.getPistonBaseIcon("piston_top_normal"))):(var3 < 6 && p_getIcon_1_ == Facing.oppositeSide[var3]?PistonBase.getPistonBaseIcon("piston_top_normal"):PistonBase.getPistonBaseIcon("piston_side"));
     }

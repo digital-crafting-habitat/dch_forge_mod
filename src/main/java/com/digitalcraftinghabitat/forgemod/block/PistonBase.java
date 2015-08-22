@@ -1,25 +1,32 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
+import buildcraft.core.lib.utils.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockPistonMoving;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityPiston;
 import net.minecraft.util.Facing;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import com.digitalcraftinghabitat.forgemod.block.PistonExtension;
+import net.minecraftforge.common.util.ForgeDirection;
 
 
 /**
  * Created by admin on 20.08.15.
  */
 public class PistonBase extends BlockPistonBase{
+    EnergyTile energyTile = null;
     private final boolean isSticky;
     @SideOnly(Side.CLIENT)
     public PistonBase(boolean p_i45443_1_) {
@@ -29,6 +36,37 @@ public class PistonBase extends BlockPistonBase{
         setCreativeTab(CreativeTabs.tabRedstone);
 
 
+    }
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new EnergyTile();
+    }
+
+    public EnergyTile getEnergyTile() {
+        return energyTile;
+    }
+
+    public void setEnergyTile(EnergyTile energyTile) {
+        this.energyTile = energyTile;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int p_149727_2_,
+                                    int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_,
+                                    int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        if (world.isRemote){
+            return true;
+        }
+        Vec3 position = p_149727_5_.getPosition(1.0F);
+        ItemStack itemStack = new ItemStack(Items.redstone);
+        EntityItem toolItem = new EntityItem(world,p_149727_2_,p_149727_3_,p_149727_4_,itemStack);
+        Utils.addToRandomInjectableAround(world, p_149727_2_, p_149727_3_, p_149727_4_, ForgeDirection.UNKNOWN, itemStack);
+        return true;
+    }
+
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        energyTile = new EnergyTile();
+        return energyTile;
     }
     private static boolean canPushBlock(Block p_150080_0_, World p_150080_1_, int p_150080_2_, int p_150080_3_, int p_150080_4_, boolean p_150080_5_) {
         if(p_150080_0_ == Blocks.obsidian) {
@@ -141,7 +179,7 @@ public class PistonBase extends BlockPistonBase{
     private boolean isIndirectlyPowered(World p_150072_1_, int p_150072_2_, int p_150072_3_, int p_150072_4_, int p_150072_5_) {
         return p_150072_5_ != 0 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ - 1, p_150072_4_, 0)?true:(p_150072_5_ != 1 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_, 1)?true:(p_150072_5_ != 2 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_ - 1, 2)?true:(p_150072_5_ != 3 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_ + 1, 3)?true:(p_150072_5_ != 5 && p_150072_1_.getIndirectPowerOutput(p_150072_2_ + 1, p_150072_3_, p_150072_4_, 5)?true:(p_150072_5_ != 4 && p_150072_1_.getIndirectPowerOutput(p_150072_2_ - 1, p_150072_3_, p_150072_4_, 4)?true:(p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_, 0)?true:(p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 2, p_150072_4_, 1)?true:(p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_ - 1, 2)?true:(p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_ + 1, 3)?true:(p_150072_1_.getIndirectPowerOutput(p_150072_2_ - 1, p_150072_3_ + 1, p_150072_4_, 4)?true:p_150072_1_.getIndirectPowerOutput(p_150072_2_ + 1, p_150072_3_ + 1, p_150072_4_, 5)))))))))));
     }
-    public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_) {
+  @Override  public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_) {
         if (!p_149696_1_.isRemote) {
             boolean tileentity1 = this.isIndirectlyPowered(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_6_);
             if (tileentity1 && p_149696_5_ == 1) {
