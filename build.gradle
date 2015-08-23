@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2.0.777'
         classpath 'io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE'
     }
 }
@@ -48,8 +48,8 @@ group= "de.digitalcraftinghabitat" // http://maven.apache.org/guides/mini/guide-
 archivesBaseName = "digital_crafting_habitat_mod"
 
 minecraft {
-    //version = "1.7.10-10.13.3.1388-1.7.10" // McVersion-ForgeVersion     this variable is later changed to contain only the MC version, while the apiVersion variable is used for the forge version.  Yeah its stupid, and will be changed eentually.
-    version = "1.7.10-10.13.3.1388-1.7.10"
+    version = "1.7.10-10.13.4.1448-1.7.10" // McVersion-ForgeVersion     this variable is later changed to contain only the MC version, while the apiVersion variable is used for the forge version.  Yeah its stupid, and will be changed eentually.
+    //version = "1.7.10-10.13.3.1388-1.7.10"
     runDir = "run" // the directory for ForgeGradle to run Minecraft in
 
     // replacing stuff in the source
