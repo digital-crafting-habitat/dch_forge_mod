@@ -18,7 +18,7 @@ public class BreakMessageEventConsumer {
     @SubscribeEvent
     public void sendMessage(BlockEvent.BreakEvent event) throws IOException {
         if (event.block instanceof BlockCraftium){
-            event.getPlayer().addChatComponentMessage(DCHUtils.getChatMessageFromText("you broke a Craftium Block"));
+            event.getPlayer().addChatComponentMessage(DCHUtils.getChatMessageFromText("You broke a Craftium Block"));
         }
     }
 
