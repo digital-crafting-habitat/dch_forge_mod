@@ -23,6 +23,7 @@ public class DigitalCraftingHabitatMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         // some example code
+
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
         GameRegistry.registerBlock(new PistonBase(false), "crafting_piston");
         GameRegistry.registerBlock(new PistonExtension(), "piston_moving");
