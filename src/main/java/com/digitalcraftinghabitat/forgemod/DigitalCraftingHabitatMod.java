@@ -1,9 +1,6 @@
 package com.digitalcraftinghabitat.forgemod;
 
-import com.digitalcraftinghabitat.forgemod.block.BlockCraftium;
-import com.digitalcraftinghabitat.forgemod.block.CraftingLever;
-import com.digitalcraftinghabitat.forgemod.block.EnergyTile;
-import com.digitalcraftinghabitat.forgemod.block.EnergyBlock;
+import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.item.CraftingHabitatItems;
@@ -28,7 +25,7 @@ public class DigitalCraftingHabitatMod {
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
         DustCraftium.mainRegistry();
-
+        BlockController.mainRegistry();
     }
 
     @EventHandler
