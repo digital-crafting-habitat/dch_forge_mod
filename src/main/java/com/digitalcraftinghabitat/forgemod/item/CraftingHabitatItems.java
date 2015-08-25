@@ -5,5 +5,5 @@ package com.digitalcraftinghabitat.forgemod.item;
  */
 public class CraftingHabitatItems {
 
-    public  static ItemCraftium itemCraftium = new ItemCraftium();
+    public  static ItemCraftiumCoal itemCraftiumCoal = new ItemCraftiumCoal();
 }

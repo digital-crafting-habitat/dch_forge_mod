@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.item.CraftingHabitatItems;
+import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -46,6 +47,6 @@ public class BlockCraftium  extends Block{
 
     @Override
     public Item getItemDropped(int metadata, Random random, int fortune) {
-        return CraftingHabitatItems.itemCraftium;
+        return ItemCraftiumCoal.coalCraftium;
     }
 }
