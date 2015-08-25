@@ -15,12 +15,12 @@ public class DatahubClientConnector {
         return "demoString";
     }
 
-    public String getIntValueForKey(String key){
-        return "demoString";
+    public int getIntValueForKey(String key){
+        return 10;
     }
 
-    public String getFloatValueForKey(String key){
-        return "demoString";
+    public float getFloatValueForKey(String key){
+        return 3.0f;
     }
 
     public String[] getArrayForKey(String key){
