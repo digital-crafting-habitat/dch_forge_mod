@@ -28,6 +28,7 @@ public class DigitalCraftingHabitatMod {
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
         DustCraftium.mainRegistry();
+
     }
 
     @EventHandler

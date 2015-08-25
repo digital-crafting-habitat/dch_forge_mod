@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 /**
- * Created by Rauca on 25.08.2015.
+ * Created by Rauca on 25.08.2015
  */
 public class DustCraftium {
     public static Item dustCraftium;
