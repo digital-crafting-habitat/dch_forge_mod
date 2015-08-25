@@ -14,11 +14,8 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = DigitalCraftingHabitatMod.MODID, version = DigitalCraftingHabitatMod.VERSION)
+@Mod(modid = RefStrings.MODID, version = RefStrings.VERSION)
 public class DigitalCraftingHabitatMod {
-    public static final String MODID = "digitalcraftinghabitat";
-    public static final String VERSION = "1.0";
-
 
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
@@ -45,7 +42,6 @@ public class DigitalCraftingHabitatMod {
 
     @EventHandler
     public void init(FMLEvent event) {
-
 
     }
 

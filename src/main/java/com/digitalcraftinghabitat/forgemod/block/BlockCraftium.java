@@ -1,6 +1,5 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
-import com.digitalcraftinghabitat.forgemod.item.CraftingHabitatItems;
 import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,7 +15,7 @@ import java.util.Random;
 /**
  * Created by christopher on 16/08/15.
  */
-public class BlockCraftium  extends Block{
+public class BlockCraftium extends Block {
 
     public static final IIcon[] TEXTURES = new IIcon[1];
 
