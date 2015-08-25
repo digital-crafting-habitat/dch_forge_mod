@@ -22,6 +22,7 @@ public class DigitalCraftingHabitatMod {
         DustCraftium.register();
         ItemCraftiumCoal.register();
         BlockController.register();
+        OreCraftium.register();
     }
 
     @EventHandler
@@ -36,7 +37,6 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
-        //GameRegistry.registerItem(new ItemCraftiumCoal(), "craftiumCoal");
         ItemCraftiumCoal.addRecipes();
     }
 

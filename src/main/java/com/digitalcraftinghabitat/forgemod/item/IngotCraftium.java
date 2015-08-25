@@ -13,7 +13,7 @@ public class IngotCraftium extends Item {
 
     public IngotCraftium() {
         super();
-        this.setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(CreativeTabs.tabMaterials);
         setTextureName("digitalcraftinghabitat:craftium");
         setUnlocalizedName("craftium_ingot");
     }
