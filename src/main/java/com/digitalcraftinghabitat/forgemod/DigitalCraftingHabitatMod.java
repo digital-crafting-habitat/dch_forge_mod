@@ -7,10 +7,12 @@ import com.digitalcraftinghabitat.forgemod.block.EnergyBlock;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.item.CraftingHabitatItems;
+import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
@@ -22,6 +24,11 @@ public class DigitalCraftingHabitatMod {
     public static final String MODID = "digitalcraftinghabitat";
     public static final String VERSION = "1.0";
 
+
+    @EventHandler
+    public void preLoad(FMLPreInitializationEvent event) {
+        DustCraftium.mainRegistry();
+    }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
@@ -44,6 +51,7 @@ public class DigitalCraftingHabitatMod {
 
 
     }
+
 
 
     @EventHandler

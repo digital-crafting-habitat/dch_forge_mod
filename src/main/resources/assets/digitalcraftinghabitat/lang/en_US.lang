@@ -3,6 +3,7 @@
 item.craftium.name=Craftium
 
 item.craftium_ingot.name=Craftium Ingot
+item.dustCraftium.name=Craftium Dust
 
 tile.craftium_tile.name=Craftium Block
 tile.energy_block.name=Crafting Energy Block
