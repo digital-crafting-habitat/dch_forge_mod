@@ -8,19 +8,16 @@ import net.minecraft.item.Item;
 /**
  * Created by Rauca on 25.08.2015
  */
-public class DustCraftium {
+public class DustCraftium extends Item {
     public static Item dustCraftium;
 
-    public static void mainRegistry() {
-        initItem();
-        registerItem();
+    public DustCraftium() {
+        setUnlocalizedName("dustCraftium");
+        setCreativeTab(CreativeTabs.tabMisc);
+        setTextureName(DigitalCraftingHabitatMod.MODID + ":craftium_dust");
     }
 
-    public static void  initItem() {
-        dustCraftium = new Item().setUnlocalizedName("dustCraftium").setCreativeTab(CreativeTabs.tabMisc).setTextureName(DigitalCraftingHabitatMod.MODID + ":craftium_dust");
-    }
-
-    public static void registerItem() {
-        GameRegistry.registerItem(dustCraftium, dustCraftium.getUnlocalizedName());
+    public static void register() {
+        GameRegistry.registerItem(dustCraftium = new DustCraftium(), dustCraftium.getUnlocalizedName());
     }
 }

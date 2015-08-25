@@ -47,6 +47,6 @@ public class BlockCraftium  extends Block{
 
     @Override
     public Item getItemDropped(int metadata, Random random, int fortune) {
-        return ItemCraftiumCoal.coalCraftium;
+        return ItemCraftiumCoal.craftiumCoal;
     }
 }

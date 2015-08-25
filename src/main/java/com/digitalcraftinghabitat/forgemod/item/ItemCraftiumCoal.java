@@ -15,23 +15,27 @@ import net.minecraft.world.World;
 /**
  * Created by christopher on 12/08/15.
  */
-public class ItemCraftiumCoal {
+public class ItemCraftiumCoal extends Item {
+    public static Item craftiumCoal;
 
-    public static Item coalCraftium;
-
-    public static void mainRegistry() {
-        initItem();
-        registerItem();
+    public ItemCraftiumCoal() {
+        setUnlocalizedName("craftiumCoal");
+        setCreativeTab(CreativeTabs.tabMisc);
+        setTextureName(DigitalCraftingHabitatMod.MODID + ":craftiumCoal");
     }
 
-    public static void  initItem() {
-        coalCraftium = new Item().setUnlocalizedName("craftiumCoal").setCreativeTab(CreativeTabs.tabMisc).setTextureName(DigitalCraftingHabitatMod.MODID + ":craftiumCoal");
+    public static void register() {
+        GameRegistry.registerItem(craftiumCoal = new ItemCraftiumCoal(), craftiumCoal.getUnlocalizedName());
     }
 
-    public static void registerItem() {
-        GameRegistry.registerItem(coalCraftium, coalCraftium.getUnlocalizedName());
+    public static void addRecipes() {
+        GameRegistry.addRecipe(new ItemStack(ItemCraftiumCoal.craftiumCoal), new Object[]{
+                " D ",
+                "DCD",
+                " D ",
+                'D', new ItemStack(DustCraftium.dustCraftium), 'C', Items.coal
+        });
     }
-
 /*
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
