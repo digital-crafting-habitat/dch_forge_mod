@@ -30,8 +30,11 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
+
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
+
         GameRegistry.registerItem(CraftingHabitatItems.itemCraftium, "craftium");
+
         GameRegistry.addRecipe(new ItemStack(Items.diamond),
                 "A A",
                 "A A",
