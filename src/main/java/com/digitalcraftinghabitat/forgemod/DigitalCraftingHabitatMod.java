@@ -33,11 +33,22 @@ public class DigitalCraftingHabitatMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         // some example code
+
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
+        GameRegistry.registerBlock(new PistonBase(false), "crafting_piston");
+        GameRegistry.registerBlock(new PistonExtension(), "piston_moving");
+        GameRegistry.registerBlock(new PistonMoving(), "piston_head");
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
+        GameRegistry.registerTileEntity(PistonTile.class, "crafting_piston_tile");
+        GameRegistry.registerItem(CraftingHabitatItems.itemCraftium, "craftium");
+        GameRegistry.addRecipe(new ItemStack(Items.diamond),
+                "A A",
+                "A A",
+                " A ",
+                'A', new ItemStack(CraftingHabitatItems.itemCraftium));
     }
 
     @EventHandler
@@ -52,7 +63,6 @@ public class DigitalCraftingHabitatMod {
     public void registerCommands(FMLServerStartingEvent event) {
         event.registerServerCommand(new CraftCommand());
     }
-
 
 
 }
