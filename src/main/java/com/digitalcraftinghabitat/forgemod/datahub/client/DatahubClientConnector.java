@@ -1,5 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.datahub.client;
 
+import redis.clients.jedis.Jedis;
+
 import java.util.Arrays;
 
 /**
@@ -7,8 +9,10 @@ import java.util.Arrays;
  */
 public class DatahubClientConnector {
 
-    public DatahubClientConnector() {
+    private Jedis jedis;
 
+    public DatahubClientConnector() {
+        jedis = new Jedis("85.214.235.74");
     }
 
     public String getSringValueForKey(String key){
@@ -16,7 +20,8 @@ public class DatahubClientConnector {
     }
 
     public int getIntValueForKey(String key){
-        return 10;
+        String redstone_value = jedis.get("redstone_value");
+        return Integer.parseInt(redstone_value);
     }
 
     public float getFloatValueForKey(String key){
@@ -26,5 +31,11 @@ public class DatahubClientConnector {
     public String[] getArrayForKey(String key){
         String[] returnArray =  {"a", "b"};
         return returnArray;
+    }
+
+    public static void main(String args[]){
+        Jedis jedis = new Jedis("85.214.235.74");
+        String redstone_value = jedis.get("redstone_value");
+        System.out.println(redstone_value);
     }
 }

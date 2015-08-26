@@ -11,7 +11,11 @@ tile.craftium_block.name=Craftium Block
 tile.crafting_lever_block.name=Crafting Lever
 tile.blockController.name=Craftium Controller
 tile.oreCraftium.name=Craftium Ore
+tile.crafting_redstone.name=Craftium Redstone Connector
 
 block.energy_block.name=Crafting Energy Block
 block.craftium_block.name=Craftium Block
-block.crafting_lever_block.name=Crafting Lever
+block.crafting_lever_block.name=Crafting Lever Block
+block.blockController.name=Craftium Controller Block
+block.oreCraftium.name=Craftium Ore Block
+block.crafting_redstone.name=Craftium Redstone Connector Block

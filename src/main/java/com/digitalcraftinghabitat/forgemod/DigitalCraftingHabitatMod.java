@@ -23,6 +23,7 @@ public class DigitalCraftingHabitatMod {
         ItemCraftiumCoal.register();
         BlockController.register();
         OreCraftium.register();
+        CraftingRedStoneConnector.register();
     }
 
     @EventHandler
