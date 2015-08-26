@@ -33,6 +33,10 @@ public class DatahubClientConnector {
         return returnArray;
     }
 
+    public void setIntValueForKey(String key, int value) {
+        jedis.set(key, String.valueOf(value));
+    }
+
     public static void main(String args[]){
         Jedis jedis = new Jedis("85.214.235.74");
         String redstone_value = jedis.get("redstone_value");
