@@ -19,8 +19,7 @@ import net.minecraft.world.World;
  */
 public class CraftingRedStoneConnector extends BlockCompressedPowered implements ITileEntityProvider {
 
-    DatahubClientConnector datahubClientConnector = new DatahubClientConnector();
-    public static boolean isActive = true;
+    public static boolean isActive;
     public static Block craftingRedStoneConnector;
 
     public CraftingRedStoneConnector() {

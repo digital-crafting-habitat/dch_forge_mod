@@ -22,7 +22,7 @@ public class RedisValueEntity extends TileEntity {
             return;
         int testkey = datahubClientConnector.getIntValueForKey("testkey");
         CraftingRedStoneConnector.isActive = (testkey == 1);
-        worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.blockType);
+        worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
     }
 
 }
