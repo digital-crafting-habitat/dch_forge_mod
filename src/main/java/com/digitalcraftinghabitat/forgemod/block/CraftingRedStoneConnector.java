@@ -50,7 +50,10 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
     }
 
     public static void register() {
-        GameRegistry.registerBlock(craftingRedStoneConnector = new CraftingRedStoneConnector(), craftingRedStoneConnector.getUnlocalizedName());
+        GameRegistry.registerBlock(
+                craftingRedStoneConnector = new CraftingRedStoneConnector(),
+                craftingRedStoneConnector.getUnlocalizedName()
+        );
     }
 
     @Override

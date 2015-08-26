@@ -1,3 +1,5 @@
+package com.digitalcraftinghabitat.forgemod;
+
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
 
 /**
@@ -15,13 +17,13 @@ public class TestRedisValues implements Runnable {
         while (true) {
             connector.setIntValueForKey("redstone_value", 1);
             try {
-                Thread.sleep(20);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             connector.setIntValueForKey("redstone_value", 0);
             try {
-                Thread.sleep(20);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

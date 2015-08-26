@@ -20,9 +20,22 @@ public class RedisValueEntity extends TileEntity {
     public void updateEntity() {
         if (worldObj.isRemote)
             return;
-        int testkey = datahubClientConnector.getIntValueForKey("testkey");
-        CraftingRedStoneConnector.isActive = (testkey == 1);
+        processDatahubValue();
         worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+    }
+
+    private void processDatahubValue() {
+        String key = "redstone_value";
+        int testkey = datahubClientConnector.getIntValueForKey(key);
+        if (testkey == 0){
+            CraftingRedStoneConnector.isActive = false;
+        }
+        else if (testkey == -1){
+            CraftingRedStoneConnector.isActive = false;
+        }
+        else{
+            CraftingRedStoneConnector.isActive = true;
+        }
     }
 
 }
