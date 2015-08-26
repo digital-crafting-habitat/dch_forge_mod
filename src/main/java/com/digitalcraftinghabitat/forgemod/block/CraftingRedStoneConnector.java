@@ -1,7 +1,6 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
-import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -9,7 +8,6 @@ import net.minecraft.block.BlockCompressedPowered;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;

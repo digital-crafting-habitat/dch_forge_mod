@@ -26,16 +26,8 @@ public class RedisValueEntity extends TileEntity {
 
     private void processDatahubValue() {
         String key = "redstone_value";
-        int testkey = datahubClientConnector.getIntValueForKey(key);
-        if (testkey == 0){
-            CraftingRedStoneConnector.isActive = false;
-        }
-        else if (testkey == -1){
-            CraftingRedStoneConnector.isActive = false;
-        }
-        else{
-            CraftingRedStoneConnector.isActive = true;
-        }
+
+        CraftingRedStoneConnector.isActive = (datahubClientConnector.getIntValueForKey(key) == 1);
     }
 
 }
