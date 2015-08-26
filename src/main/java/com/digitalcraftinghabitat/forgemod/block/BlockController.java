@@ -23,7 +23,6 @@ public class BlockController extends Block {
         GameRegistry.registerBlock(blockController = new BlockController(Material.circuits), blockController.getUnlocalizedName());
     }
 
-
 }
 
 
