@@ -49,25 +49,38 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord,
+                                    EntityPlayer player,
+                                    int lookAtX, float lookAtY, float lookAtZ,
+                                    float p_149727_9_) {
         if (world.isRemote) {
             return true;
         }
-        int testkey = datahubClientConnector.getIntValueForKey("testkey");
+        String key = "redstone_value";
+        int testkey = datahubClientConnector.getIntValueForKey(key);
         player.addChatComponentMessage(DCHUtils.getChatMessageFromText("Value: " + testkey));
         if (testkey == 0){
             isActive = false;
+        }
+        else if (testkey == -1){
+            isActive = false;
+            player.addChatComponentMessage(
+                    DCHUtils.getChatMessageFromText("Error while getting the Value for Key " + key)
+            );
         }
         else{
             isActive = true;
         }
 
-        world.notifyBlockChange(p_149727_2_, p_149727_3_, p_149727_4_, this);
+        world.notifyBlockChange(xCoord, yCoord, zCoord, this);
         return isActive;
     }
 
     public static void register() {
-        GameRegistry.registerBlock(craftingRedStoneConnector = new CraftingRedStoneConnector(), craftingRedStoneConnector.getUnlocalizedName());
+        GameRegistry.registerBlock(
+                craftingRedStoneConnector = new CraftingRedStoneConnector(),
+                craftingRedStoneConnector.getUnlocalizedName()
+        );
     }
 
     @Override
