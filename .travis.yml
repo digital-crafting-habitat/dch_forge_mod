@@ -3,3 +3,7 @@ jdk:
   - oraclejdk7
 install:
   - ./gradlew build --stacktrace
+branches:
+  only:
+    - master
+    - /^DCH-.*$/
