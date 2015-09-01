@@ -5,6 +5,8 @@ import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
+import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
+import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLEvent;
@@ -13,9 +15,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = RefStrings.MODID, version = RefStrings.VERSION)
 public class DigitalCraftingHabitatMod {
+
+    public DCHConfiguration dchConfiguration;
 
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
@@ -24,6 +29,11 @@ public class DigitalCraftingHabitatMod {
         BlockController.register();
         OreCraftium.register();
         CraftingRedStoneConnector.register();
+        dchConfiguration = new DCHConfiguration(event.getSuggestedConfigurationFile());
+        DCHLog.info(dchConfiguration.getConfig().getCategoryNames().toString());
+        String someString = dchConfiguration.getConfig()
+                .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
+        DCHLog.info(someString);
     }
 
     @EventHandler
