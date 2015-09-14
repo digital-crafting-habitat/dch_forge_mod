@@ -14,6 +14,7 @@ public class DatahubClientConnector {
 
     public DatahubClientConnector() {
         jedis = new Jedis("85.214.235.74");
+        jedis.auth("DCH-Rocks-2015@");
     }
 
     public String getSringValueForKey(String key) {
