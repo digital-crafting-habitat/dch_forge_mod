@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
  * Created by Rauca on 26.08.2015.
  */
 public class RedisValueEntity extends TileEntity {
-    DatahubClientConnector datahubClientConnector;
+    static DatahubClientConnector datahubClientConnector;
     public int customField;
 
     public RedisValueEntity(int customField) {
@@ -20,6 +20,7 @@ public class RedisValueEntity extends TileEntity {
 
     public static void init() {
         GameRegistry.registerTileEntity(RedisValueEntity.class, RefStrings.MODID + "redis_tile_entity");
+        datahubClientConnector = new DatahubClientConnector();
     }
 
     @Override

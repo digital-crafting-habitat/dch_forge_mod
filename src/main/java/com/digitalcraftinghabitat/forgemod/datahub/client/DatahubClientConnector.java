@@ -51,6 +51,7 @@ public class DatahubClientConnector {
     public static void main(String args[]){
         Jedis jedis = new Jedis("85.214.235.74");
         jedis.auth("DCH-Rocks-2015@");
+        jedis.set("redstone_value","0".replaceAll("\\D",""));
         String redstone_value = jedis.get("redstone_value");
         System.out.println(redstone_value);
     }
