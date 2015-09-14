@@ -4,6 +4,7 @@ import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import redis.clients.jedis.Jedis;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by christopher on 25/08/15.
@@ -15,6 +16,9 @@ public class DatahubClientConnector {
     public DatahubClientConnector() {
         jedis = new Jedis("85.214.235.74");
         jedis.auth("DCH-Rocks-2015@");
+        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
+        DCHLog.info("XXX:" + jedis.getClient().getSoTimeout());
+        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
     }
 
     public String getSringValueForKey(String key) {
@@ -25,13 +29,12 @@ public class DatahubClientConnector {
         String returnedValue = jedis.get(valueKey);
 
         if ((returnedValue != null) && (returnedValue.length() > 0)) {
-            int parsedIntegerValue = Integer.parseInt(returnedValue);
+            int parsedIntegerValue = Integer.parseInt(returnedValue.replaceAll("\\D", ""));
             return parsedIntegerValue;
         }
 
         DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
         return -1;
-
 
     }
 
@@ -51,7 +54,6 @@ public class DatahubClientConnector {
     public static void main(String args[]){
         Jedis jedis = new Jedis("85.214.235.74");
         jedis.auth("DCH-Rocks-2015@");
-        jedis.set("redstone_value","0".replaceAll("\\D",""));
         String redstone_value = jedis.get("redstone_value");
         System.out.println(redstone_value);
     }

@@ -17,8 +17,8 @@ import net.minecraft.world.World;
  */
 public class CraftingRedStoneConnector extends BlockCompressedPowered implements ITileEntityProvider {
 
-    public static boolean isActive;
     public static Block craftingRedStoneConnector;
+    RedisValueEntity entity;
 
     public CraftingRedStoneConnector() {
         super(MapColor.tntColor);
@@ -30,7 +30,7 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
 
     @Override
     public boolean canProvidePower() {
-        return isActive;
+        return isActive();
     }
 
     @Override
@@ -40,11 +40,10 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
 
     @Override
     public int isProvidingStrongPower(IBlockAccess p_149748_1_, int p_149748_2_, int p_149748_3_, int p_149748_4_, int p_149748_5_) {
-        if (isActive) {
+        if (isActive()) {
             return 15;
         }
         return 0;
-
     }
 
     public static void register() {
@@ -56,15 +55,25 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
 
     @Override
     public int isProvidingWeakPower(IBlockAccess p_149709_1_, int p_149709_2_, int p_149709_3_, int p_149709_4_, int p_149709_5_) {
-        if (isActive) {
+        if (isActive()) {
             return 15;
-
         }
         return 0;
     }
 
+    private static int value = 12;
+
     @Override
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return new RedisValueEntity(12);
+        if (value > 14){
+            value = 12;
+        }
+        entity = new RedisValueEntity(value++);
+        return entity;
+
+    }
+
+    private boolean isActive(){
+        return entity.isActive();
     }
 }
