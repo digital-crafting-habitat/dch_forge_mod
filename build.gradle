@@ -48,7 +48,7 @@ group= "de.digitalcraftinghabitat"
 archivesBaseName = "digital_crafting_habitat_mod"
 
 minecraft {
-    version = "1.7.10-10.13.3.1388-1.7.10"
+    version = "1.7.10-10.13.4.1448-1.7.10"
     runDir = "run"
 
     replace '@VERSION@', project.version

@@ -2,6 +2,7 @@ package com.digitalcraftinghabitat.forgemod;
 
 import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
+import com.digitalcraftinghabitat.forgemod.event.WorldGen;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
@@ -21,6 +22,7 @@ import net.minecraftforge.common.config.Configuration;
 public class DigitalCraftingHabitatMod {
 
     public DCHConfiguration dchConfiguration;
+    public WorldGen worldGen;
 
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
@@ -34,6 +36,7 @@ public class DigitalCraftingHabitatMod {
         String someString = dchConfiguration.getConfig()
                 .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
         DCHLog.info(someString);
+        worldGen = new WorldGen();
     }
 
     @EventHandler
@@ -50,6 +53,7 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
         ItemCraftiumCoal.addRecipes();
         CraftingRedStoneConnector.addRecipes();
+        GameRegistry.registerWorldGenerator(worldGen,1);
     }
 
     @EventHandler
