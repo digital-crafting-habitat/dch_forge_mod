@@ -1,7 +1,7 @@
 package com.digitalcraftinghabitat.forgemod;
 
 import com.digitalcraftinghabitat.forgemod.block.*;
-import com.digitalcraftinghabitat.forgemod.coremod.CraftCommand;
+import com.digitalcraftinghabitat.forgemod.core.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.event.WorldGen;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
@@ -31,7 +31,7 @@ public class DigitalCraftingHabitatMod {
         BlockController.register();
         OreCraftium.register();
         CraftingRedStoneConnector.register();
-        dchConfiguration = new DCHConfiguration(event.getSuggestedConfigurationFile());
+        dchConfiguration = DCHConfiguration.getInstanceWithFile(event.getSuggestedConfigurationFile());
         DCHLog.info(dchConfiguration.getConfig().getCategoryNames().toString());
         String someString = dchConfiguration.getConfig()
                 .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
@@ -53,7 +53,7 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
         ItemCraftiumCoal.addRecipes();
         CraftingRedStoneConnector.addRecipes();
-        GameRegistry.registerWorldGenerator(worldGen,1);
+        GameRegistry.registerWorldGenerator(worldGen, 1);
     }
 
     @EventHandler

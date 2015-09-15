@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod.datahub.client;
 
+import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import redis.clients.jedis.Jedis;
 
@@ -15,19 +16,14 @@ public class DatahubClientConnector {
     private Jedis jedis;
 
     public DatahubClientConnector() {
-        jedis = new Jedis("85.214.235.74");
-        jedis.auth("DCH-Rocks-2015@");
-        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
-        DCHLog.info("XXX:" + jedis.getClient().getSoTimeout());
-        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
+        DCHConfiguration dchConfiguration = DCHConfiguration.getInstance();
+        jedis = new Jedis(dchConfiguration.getJedisUrl());
+        jedis.auth(dchConfiguration.getJedisAuth());
+        //jedis = new Jedis("192.168.99.100", 32768);
 
         jedis.getClient().setConnectionTimeout(40000);
         jedis.getClient().setSoTimeout(40000);
         jedis.getClient().setConnectionTimeout(40000);
-
-        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
-        DCHLog.info("XXX:" + jedis.getClient().getSoTimeout());
-        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
     }
 
     public String getSringValueForKey(String key) {
@@ -46,13 +42,15 @@ public class DatahubClientConnector {
             else{
                 DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
             }
-
-
         }
         catch (Exception e){
             DCHLog.error(e);
         }
         return -1;
+    }
+
+    public void setValueForKey(String valueKey, String value) {
+        jedis.set(valueKey, value);
     }
 
     public float getFloatValueForKey(String key) {
