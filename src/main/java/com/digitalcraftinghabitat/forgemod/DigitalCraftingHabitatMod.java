@@ -49,6 +49,7 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
         ItemCraftiumCoal.addRecipes();
+        CraftingRedStoneConnector.addRecipes();
     }
 
     @EventHandler

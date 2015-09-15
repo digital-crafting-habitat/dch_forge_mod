@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import com.digitalcraftinghabitat.forgemod.util.DCHUtils;
@@ -11,6 +12,8 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -39,7 +42,7 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
             return false;
         RedisValueEntity entity = (RedisValueEntity) p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_);
         p_149727_5_.addChatComponentMessage(DCHUtils.getChatMessageFromText("Current Value " + entity.isActive() +
-                " id: " + entity.getCustomField() + " att coord : X: "+p_149727_2_+" Y: :"+p_149727_3_+" Z: "+p_149727_4_+""));
+                " id: " + entity.getCustomField() + " att coord : X: " + p_149727_2_ + " Y: :" + p_149727_3_ + " Z: " + p_149727_4_ + ""));
         return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
 
     }
@@ -86,4 +89,12 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
     }
 
 
+    public static void addRecipes() {
+        GameRegistry.addRecipe(new ItemStack(CraftingRedStoneConnector.craftingRedStoneConnector), new Object[]{
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', new ItemStack(DustCraftium.dustCraftium)
+        });
+    }
 }
