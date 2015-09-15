@@ -6,6 +6,8 @@ import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -13,14 +15,10 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class RedisValueEntity extends TileEntity {
     static DatahubClientConnector datahubClientConnector;
+
     public int customField;
     private boolean active;
     private int count;
-
-    public RedisValueEntity(int customField) {
-        DCHLog.info("new TileEntity with ID " + customField);
-        this.customField = customField;
-    }
 
     public static void init() {
         GameRegistry.registerTileEntity(RedisValueEntity.class, RefStrings.MODID + "redis_tile_entity");
@@ -32,19 +30,27 @@ public class RedisValueEntity extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote)
+        if (worldObj.isRemote){
             return;
-        if (count >= 100){
-            DCHLog.info("update value for tile with id " + customField + " actual value: " + active);
-            boolean oldValue = active;
-            processDatahubValue();
-            if (oldValue != active){
-                DCHLog.info("new Value detected " + active);
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+        }else{
+            if(customField > 0){
+                if (count >= 100){
+                    DCHLog.info("update value for tile with id " + customField + " actual value: " + active);
+                    boolean oldValue = active;
+                    processDatahubValue();
+                    if (oldValue != active){
+                        DCHLog.info("new Value detected " + active);
+                    }
+                    count = 0;
+                    worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+                }
+                count++;
+            }else{
+                DCHLog.info("Custom Field is null");
+                // here should go the code to generate a new Value
+                customField = count2++;
             }
-            count = 0;
         }
-        count++;
     }
 
     private void processDatahubValue() {
@@ -55,7 +61,6 @@ public class RedisValueEntity extends TileEntity {
         }else {
             active = false;
         }
-        DCHLog.info("value for key " + key + " is " + value);
     }
 
     public boolean isActive (){
@@ -65,20 +70,46 @@ public class RedisValueEntity extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound par1)
     {
-        super.writeToNBT(par1);
+        DCHLog.info("VVVVVV: writeToNBT entity Tile with id customField and value " + customField);
         par1.setInteger("customField", customField);
+        DCHLog.info("VVVVVV: writeToNBT entity Tile with id active and value " + active);
+        par1.setBoolean("active", active);
+        super.writeToNBT(par1);
     }
+
+    private static int count2 = 12;
 
     @Override
     public void readFromNBT(NBTTagCompound par1)
     {
-        super.readFromNBT(par1);
-
-        par1.getString("id");
-        par1.getInteger("z");
-        par1.getInteger("z");
-        par1.getInteger("z");
+        DCHLog.info("TTTTTT: readFromNBT entity Tile with id customField and value " + customField);
         this.customField = par1.getInteger("customField");
+        if (customField < 1){
+            //HERE SHOULD GO THE CODE TO LOAD FROM REDIS
+            customField = count2++;
+            DCHLog.info("TTTTTT: NO value for customField during read, create a new one for entity : " + customField);
+        }
+        DCHLog.info("TTTTTT: readFromNBT entity Tile with id active and value " + active);
+        this.active = par1.getBoolean("active");
+        super.readFromNBT(par1);
+    }
+
+    public int getCustomField() {
+        return customField;
+    }
+
+    public void setCustomField(int customField) {
+        this.customField = customField;
+    }
+
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        DCHLog.info("TTTTTT: onDataPacket called");
+        readFromNBT(packet.func_148857_g());
     }
 
 }

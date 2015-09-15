@@ -3,6 +3,7 @@ package com.digitalcraftinghabitat.forgemod.datahub.client;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import redis.clients.jedis.Jedis;
 
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,14 @@ public class DatahubClientConnector {
         DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
         DCHLog.info("XXX:" + jedis.getClient().getSoTimeout());
         DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
+
+        jedis.getClient().setConnectionTimeout(40000);
+        jedis.getClient().setSoTimeout(40000);
+        jedis.getClient().setConnectionTimeout(40000);
+
+        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
+        DCHLog.info("XXX:" + jedis.getClient().getSoTimeout());
+        DCHLog.info("XXX:" + jedis.getClient().getConnectionTimeout());
     }
 
     public String getSringValueForKey(String key) {
@@ -26,16 +35,24 @@ public class DatahubClientConnector {
     }
 
     public int getIntValueForKey(String valueKey) {
-        String returnedValue = jedis.get(valueKey);
+        try {
+            String returnedValue = jedis.get(valueKey);
 
-        if ((returnedValue != null) && (returnedValue.length() > 0)) {
-            int parsedIntegerValue = Integer.parseInt(returnedValue.replaceAll("\\D", ""));
-            return parsedIntegerValue;
+            if ((returnedValue != null) && (returnedValue.length() > 0)) {
+                int parsedIntegerValue = Integer.parseInt(returnedValue.replaceAll("\\D", ""));
+                DCHLog.warning("Returned Redis Value for Key " + valueKey + " was " + parsedIntegerValue);
+                return parsedIntegerValue;
+            }
+            else{
+                DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
+            }
+
+
         }
-
-        DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
+        catch (Exception e){
+            DCHLog.error(e);
+        }
         return -1;
-
     }
 
     public float getFloatValueForKey(String key) {
