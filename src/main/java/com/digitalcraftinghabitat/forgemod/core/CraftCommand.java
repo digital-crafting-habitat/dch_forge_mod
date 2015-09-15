@@ -1,4 +1,4 @@
-package com.digitalcraftinghabitat.forgemod.coremod;
+package com.digitalcraftinghabitat.forgemod.core;
 
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
