@@ -21,12 +21,14 @@ public class RedisValueEntity extends TileEntity {
     private boolean active;
     private int count;
 
-    public static void init() {
-        GameRegistry.registerTileEntity(RedisValueEntity.class, RefStrings.MODID + "redis_tile_entity");
+    public RedisValueEntity() {
         if (datahubClientConnector == null){
             datahubClientConnector = new DatahubClientConnector();
         }
+    }
 
+    public static void init() {
+        GameRegistry.registerTileEntity(RedisValueEntity.class, RefStrings.MODID + "redis_tile_entity");
     }
 
     @Override
@@ -35,7 +37,7 @@ public class RedisValueEntity extends TileEntity {
             return;
         }else{
             if(customField > 0){
-                if (count >= 100){
+                if (count >= 25){
                     DCHLog.info("update value for tile with id " + customField + " actual value: " + active);
                     boolean oldValue = active;
                     processDatahubValue();
