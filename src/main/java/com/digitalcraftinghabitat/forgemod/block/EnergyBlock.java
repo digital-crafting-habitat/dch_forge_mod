@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import buildcraft.core.lib.utils.Utils;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -31,7 +32,7 @@ public class EnergyBlock extends Block  implements ITileEntityProvider {
         setHardness(3.0F);
         setResistance(5.0F);
         setStepSound(soundTypeGlass);
-        setCreativeTab(CreativeTabs.tabBlock);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         setBlockName("energy_block");
     }
 

@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
@@ -32,7 +33,7 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
         super(MapColor.tntColor);
         setBlockTextureName(RefStrings.MODID + ":ore/Craftstone");
         setBlockName("crafting_redstone");
-        setCreativeTab(CreativeTabs.tabRedstone);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         RedisValueEntity.init();
     }
 

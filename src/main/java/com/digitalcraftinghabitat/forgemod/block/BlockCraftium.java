@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +24,7 @@ public class BlockCraftium extends Block {
     public BlockCraftium() {
         super(Material.rock);
         setBlockName("craftium_block");
-        setCreativeTab(CreativeTabs.tabBlock);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         this.setResistance(3.0F);
         this.setHardness(5.0F);
     }

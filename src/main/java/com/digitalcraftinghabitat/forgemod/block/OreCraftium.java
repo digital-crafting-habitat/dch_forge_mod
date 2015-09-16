@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ public class OreCraftium extends Block {
     protected OreCraftium(Material material) {
         super(material);
         setBlockName("oreCraftium");
-        setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         setBlockTextureName(RefStrings.MODID + ":ore/Ore_Craftium");
         setResistance(3.0F);
         setHardness(5.0F);

@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,7 +16,7 @@ public class BlockController extends Block {
     protected BlockController(Material material) {
         super(material);
         setBlockName("blockController");
-        setCreativeTab(CreativeTabs.tabBlock);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         setBlockTextureName(RefStrings.MODID + ":ore/dch_logo_block");
     }
 

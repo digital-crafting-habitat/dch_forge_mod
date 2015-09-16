@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import net.minecraft.block.BlockLever;
@@ -20,7 +21,7 @@ public class CraftingLever extends BlockLever {
             datahubClientConnector = new DatahubClientConnector();
         }
         setBlockName("crafting_lever_block");
-        setCreativeTab(CreativeTabs.tabRedstone);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         this.setResistance(3.0F);
         this.setHardness(5.0F);
     }

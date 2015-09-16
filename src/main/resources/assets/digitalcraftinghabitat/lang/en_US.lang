@@ -19,3 +19,5 @@ block.crafting_lever_block.name=Crafting Lever Block
 block.blockController.name=Craftium Controller Block
 block.oreCraftium.name=Craftium Ore Block
 block.crafting_redstone.name=Craftium Redstone Connector Block
+
+itemGroup.tabdigitalCraftingHabitat=Digital Crafting Habitat

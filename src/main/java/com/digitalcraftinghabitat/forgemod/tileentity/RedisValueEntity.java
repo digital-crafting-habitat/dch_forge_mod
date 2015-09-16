@@ -38,7 +38,7 @@ public class RedisValueEntity extends TileEntity {
         }else{
             if(customField > 0){
                 if (count >= 25){
-                    DCHLog.info("update value for tile with id " + customField + " actual value: " + active);
+                    // DCHLog.info("update value for tile with id " + customField + " actual value: " + active);
                     boolean oldValue = active;
                     processDatahubValue();
                     if (oldValue != active){
@@ -73,9 +73,9 @@ public class RedisValueEntity extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound par1)
     {
-        DCHLog.info("VVVVVV: writeToNBT entity Tile with id customField and value " + customField);
+        // DCHLog.info("VVVVVV: writeToNBT entity Tile with id customField and value " + customField);
         par1.setInteger("customField", customField);
-        DCHLog.info("VVVVVV: writeToNBT entity Tile with id active and value " + active);
+        // DCHLog.info("VVVVVV: writeToNBT entity Tile with id active and value " + active);
         par1.setBoolean("active", active);
         super.writeToNBT(par1);
     }
