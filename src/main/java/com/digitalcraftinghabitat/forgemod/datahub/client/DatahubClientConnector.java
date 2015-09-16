@@ -36,11 +36,11 @@ public class DatahubClientConnector {
 
             if ((returnedValue != null) && (returnedValue.length() > 0)) {
                 int parsedIntegerValue = Integer.parseInt(returnedValue.replaceAll("\\D", ""));
-                DCHLog.warning("Returned Redis Value for Key " + valueKey + " was " + parsedIntegerValue);
+                // DCHLog.warning("Returned Redis Value for Key " + valueKey + " was " + parsedIntegerValue);
                 return parsedIntegerValue;
             }
             else{
-                DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
+                // DCHLog.warning("Returned Redis Value for Key " + valueKey + " was empty");
             }
         }
         catch (Exception e){
