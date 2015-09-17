@@ -5,6 +5,8 @@ import com.digitalcraftinghabitat.forgemod.GUI.GUIID;
 import com.digitalcraftinghabitat.forgemod.RefStrings;
 import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
+import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
+import com.digitalcraftinghabitat.forgemod.item.ItemIngotCraftium;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,6 +16,9 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -107,10 +112,12 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
 
     public static void addRecipes() {
         GameRegistry.addRecipe(new ItemStack(CraftingRedStoneConnector.craftingRedStoneConnector), new Object[]{
-                "XXX",
-                "XXX",
-                "XXX",
-                'X', new ItemStack(DustCraftium.dustCraftium)
+                "RIR",
+                "IVI",
+                "KCK",
+                'R', new ItemStack(Blocks.redstone_torch), 'I', new ItemStack(ItemIngotCraftium.itemCraftiumIngot),
+                'V', new ItemStack(Items.repeater), 'K', new ItemStack(Items.comparator),
+                'C', new ItemStack(ItemCraftiumCoal.craftiumCoal)
         });
     }
 }

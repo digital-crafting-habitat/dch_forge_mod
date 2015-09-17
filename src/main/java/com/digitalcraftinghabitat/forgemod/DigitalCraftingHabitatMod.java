@@ -1,13 +1,12 @@
 package com.digitalcraftinghabitat.forgemod;
 
-import com.digitalcraftinghabitat.forgemod.GUI.GuiHandler;
-import com.digitalcraftinghabitat.forgemod.GUI.GUIID;
 import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.core.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.event.WorldGen;
 import com.digitalcraftinghabitat.forgemod.event.consumer.BreakMessageEventConsumer;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
+import com.digitalcraftinghabitat.forgemod.item.ItemIngotCraftium;
 import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.Mod;
@@ -17,7 +16,6 @@ import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -35,6 +33,7 @@ public class DigitalCraftingHabitatMod {
     public void preLoad(FMLPreInitializationEvent event) {
         DustCraftium.register();
         ItemCraftiumCoal.register();
+        ItemIngotCraftium.register();
         BlockController.register();
         OreCraftium.register();
         CraftingRedStoneConnector.register();
@@ -59,6 +58,7 @@ public class DigitalCraftingHabitatMod {
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
         GameRegistry.registerTileEntity(EnergyTile.class, "energy_tile");
         ItemCraftiumCoal.addRecipes();
+        ItemIngotCraftium.addRecipes();
         CraftingRedStoneConnector.addRecipes();
         GameRegistry.registerWorldGenerator(worldGen, 1);
         // NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
