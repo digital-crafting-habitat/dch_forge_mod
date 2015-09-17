@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod;
 
+import com.digitalcraftinghabitat.forgemod.GUI.GuiHandler;
 import com.digitalcraftinghabitat.forgemod.GUI.mcreator_iDGUI;
 import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.core.CraftCommand;
@@ -10,19 +11,14 @@ import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
 import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Instance;
-
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -76,21 +72,8 @@ public class DigitalCraftingHabitatMod {
 
     }
 
-
     @EventHandler
     public void registerCommands(FMLServerStartingEvent event) {
         event.registerServerCommand(new CraftCommand());
     }
-
-
-
-
-public static class GuiHandler implements IGuiHandler {
-    @Override public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if(id == mcreator_iDGUI.GUIID)return new mcreator_iDGUI.GuiContainerMod(player);
-        return null;}
-    @Override public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if(id == mcreator_iDGUI.GUIID)return new mcreator_iDGUI.GuiWindow(world, x, y, z, player);
-        return null;}
-}
 }

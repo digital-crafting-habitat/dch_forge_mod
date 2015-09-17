@@ -6,7 +6,6 @@ import com.digitalcraftinghabitat.forgemod.RefStrings;
 import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
-import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import com.digitalcraftinghabitat.forgemod.util.DCHUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -60,8 +59,8 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
             if (p_149727_5_ instanceof EntityPlayer)
                 ((EntityPlayer) p_149727_5_).openGui(DigitalCraftingHabitatMod.instance, mcreator_iDGUI.GUIID, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
         }
-         //return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
-return true;
+        //return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+        return true;
     }
 
 

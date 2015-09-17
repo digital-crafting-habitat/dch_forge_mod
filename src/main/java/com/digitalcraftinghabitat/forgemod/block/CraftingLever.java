@@ -4,7 +4,6 @@ import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import net.minecraft.block.BlockLever;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

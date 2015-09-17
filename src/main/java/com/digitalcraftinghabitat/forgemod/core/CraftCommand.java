@@ -34,30 +34,30 @@ public class CraftCommand implements ICommand {
 
     @Override
     public void processCommand(ICommandSender sender, String[] p_71515_2_) {
-        if ((p_71515_2_ != null) &&(p_71515_2_.length > 4)){
-            if (p_71515_2_[0].equals("set_id")){
+        if ((p_71515_2_ != null) && (p_71515_2_.length > 4)) {
+            if (p_71515_2_[0].equals("set_id")) {
                 DCHLog.warning("set id called");
                 DCHLog.warning("coords X: " + p_71515_2_[1] + " Y: " + p_71515_2_[2] + " Z: " + p_71515_2_[3]);
                 int x = Integer.parseInt(p_71515_2_[1]);
                 int y = Integer.parseInt(p_71515_2_[2]);
                 int z = Integer.parseInt(p_71515_2_[3]);
                 TileEntity tileEntity = sender.getEntityWorld().getTileEntity(x, y, z);
-                if ((tileEntity != null) && (tileEntity instanceof RedisValueEntity )){
-                    try{
+                if ((tileEntity != null) && (tileEntity instanceof RedisValueEntity)) {
+                    try {
                         RedisValueEntity redisValueEntity = (RedisValueEntity) sender.getEntityWorld().getTileEntity(x, y, z);
                         if ((p_71515_2_[4] != null) && (!p_71515_2_[4].isEmpty())) {
-                            try{
+                            try {
                                 redisValueEntity.setCustomField(Integer.parseInt(p_71515_2_[4]));
                                 DCHLog.warning("set new id " + p_71515_2_[4] + " to entity");
-                            }catch(NumberFormatException e){
+                            } catch (NumberFormatException e) {
                                 DCHLog.error(e);
                             }
                         }
-                    } catch(ClassCastException e){
+                    } catch (ClassCastException e) {
                         DCHLog.error(e);
                     }
-                }else{
-                    if ((tileEntity == null)){
+                } else {
+                    if ((tileEntity == null)) {
                         DCHLog.warning("tile at coords is null");
                     }
                 }
