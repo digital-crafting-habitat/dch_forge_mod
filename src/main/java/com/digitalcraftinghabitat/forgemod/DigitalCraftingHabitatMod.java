@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod;
 
+import com.digitalcraftinghabitat.forgemod.GUI.mcreator_iDGUI;
 import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.core.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.event.WorldGen;
@@ -9,12 +10,19 @@ import com.digitalcraftinghabitat.forgemod.item.ItemCraftiumCoal;
 import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
+
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -23,6 +31,10 @@ public class DigitalCraftingHabitatMod {
 
     public DCHConfiguration dchConfiguration;
     public WorldGen worldGen;
+    mcreator_iDGUI mcreator_5 = new mcreator_iDGUI();
+
+    @Instance(value = RefStrings.MODID)
+    public static DigitalCraftingHabitatMod instance;
 
     @EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
@@ -37,6 +49,8 @@ public class DigitalCraftingHabitatMod {
                 .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
         DCHLog.info(someString);
         worldGen = new WorldGen();
+        //mcreator_5.instance = this.instance;
+        mcreator_iDGUI.instance = instance;
     }
 
     @EventHandler
@@ -54,6 +68,7 @@ public class DigitalCraftingHabitatMod {
         ItemCraftiumCoal.addRecipes();
         CraftingRedStoneConnector.addRecipes();
         GameRegistry.registerWorldGenerator(worldGen, 1);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 
     @EventHandler
@@ -68,4 +83,14 @@ public class DigitalCraftingHabitatMod {
     }
 
 
+
+
+public static class GuiHandler implements IGuiHandler {
+    @Override public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        if(id == mcreator_iDGUI.GUIID)return new mcreator_iDGUI.GuiContainerMod(player);
+        return null;}
+    @Override public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        if(id == mcreator_iDGUI.GUIID)return new mcreator_iDGUI.GuiWindow(world, x, y, z, player);
+        return null;}
+}
 }

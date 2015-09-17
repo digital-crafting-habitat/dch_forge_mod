@@ -1,5 +1,6 @@
 package com.digitalcraftinghabitat.forgemod.tileentity;
 
+import com.digitalcraftinghabitat.forgemod.GUI.mcreator_iDGUI;
 import com.digitalcraftinghabitat.forgemod.RefStrings;
 import com.digitalcraftinghabitat.forgemod.block.CraftingRedStoneConnector;
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
@@ -17,7 +18,7 @@ import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 public class RedisValueEntity extends TileEntity {
     static DatahubClientConnector datahubClientConnector;
 
-    public int customField;
+    public int customField = mcreator_iDGUI.GuiWindow.dchId;
     private boolean active;
     private int count;
 
@@ -51,12 +52,14 @@ public class RedisValueEntity extends TileEntity {
             }else{
                 DCHLog.info("Custom Field is null");
                 // here should go the code to generate a new Value
-                customField = count2++;
+                //customField = count2++;
+                customField = mcreator_iDGUI.GuiWindow.dchId;
             }
         }
     }
 
     private void processDatahubValue() {
+        customField = mcreator_iDGUI.GuiWindow.dchId;
         String key = "id_" + customField;
         int value = datahubClientConnector.getIntValueForKey(key);
         if (value == 1){
