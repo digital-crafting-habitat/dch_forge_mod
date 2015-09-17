@@ -50,9 +50,6 @@ public class DigitalCraftingHabitatMod {
         // some example code
 
         MinecraftForge.EVENT_BUS.register(new BreakMessageEventConsumer());
-        GameRegistry.registerBlock(new PistonBase(false), "crafting_piston");
-        GameRegistry.registerBlock(new PistonExtension(), "piston_moving");
-        GameRegistry.registerBlock(new PistonMoving(), "piston_head");
         GameRegistry.registerBlock(new EnergyBlock(), "energy_block");
         GameRegistry.registerBlock(new BlockCraftium(), "craftium_block");
         GameRegistry.registerBlock(new CraftingLever(), "crafting_lever_block");
@@ -61,7 +58,7 @@ public class DigitalCraftingHabitatMod {
         ItemIngotCraftium.addRecipes();
         CraftingRedStoneConnector.addRecipes();
         GameRegistry.registerWorldGenerator(worldGen, 1);
-        // NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        //NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 
     @EventHandler

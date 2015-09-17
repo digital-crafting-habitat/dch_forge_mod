@@ -5,6 +5,7 @@ import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneOre;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,7 +25,7 @@ public class OreCraftium extends Block {
         setBlockTextureName(RefStrings.MODID + ":ore/Ore_Craftium");
         setResistance(3.0F);
         setHardness(5.0F);
-        setLightLevel(0.3F);
+        setLightLevel(0.5F);
         setHarvestLevel("pickaxe", 2);
         setStepSound(soundTypeStone);
     }

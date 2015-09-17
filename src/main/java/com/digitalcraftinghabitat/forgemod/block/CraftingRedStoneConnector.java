@@ -10,6 +10,8 @@ import com.digitalcraftinghabitat.forgemod.item.ItemIngotCraftium;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressedPowered;
 import net.minecraft.block.ITileEntityProvider;
@@ -42,7 +44,11 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
         RedisValueEntity.init();
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
     public void onBlockAdded(World world, int i, int j, int k) {
+        if (world.isRemote)
+            return;
         EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
         if (entity != null && world != null) {
             int le = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
@@ -53,6 +59,7 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         if (p_149727_1_.isRemote)
             return false;
