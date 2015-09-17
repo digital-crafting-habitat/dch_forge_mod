@@ -10,13 +10,13 @@ import net.minecraft.world.World;
 public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == mcreator_iDGUI.GUIID) return new GuiContainerMod(player);
+        if (id == GUIID.GUIID) return new GuiContainerMod(player);
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == mcreator_iDGUI.GUIID) return new GuiWindow(world, x, y, z, player);
+        if (id == GUIID.GUIID) return new GuiWindow(world, x, y, z, player);
         return null;
     }
 }

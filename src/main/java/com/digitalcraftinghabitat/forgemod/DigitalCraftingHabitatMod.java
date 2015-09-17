@@ -1,7 +1,7 @@
 package com.digitalcraftinghabitat.forgemod;
 
 import com.digitalcraftinghabitat.forgemod.GUI.GuiHandler;
-import com.digitalcraftinghabitat.forgemod.GUI.mcreator_iDGUI;
+import com.digitalcraftinghabitat.forgemod.GUI.GUIID;
 import com.digitalcraftinghabitat.forgemod.block.*;
 import com.digitalcraftinghabitat.forgemod.core.CraftCommand;
 import com.digitalcraftinghabitat.forgemod.event.WorldGen;
@@ -27,7 +27,6 @@ public class DigitalCraftingHabitatMod {
 
     public DCHConfiguration dchConfiguration;
     public WorldGen worldGen;
-    mcreator_iDGUI mcreator_5 = new mcreator_iDGUI();
 
     @Instance(value = RefStrings.MODID)
     public static DigitalCraftingHabitatMod instance;
@@ -45,8 +44,6 @@ public class DigitalCraftingHabitatMod {
                 .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
         DCHLog.info(someString);
         worldGen = new WorldGen();
-        //mcreator_5.instance = this.instance;
-        mcreator_iDGUI.instance = instance;
     }
 
     @EventHandler
@@ -64,7 +61,7 @@ public class DigitalCraftingHabitatMod {
         ItemCraftiumCoal.addRecipes();
         CraftingRedStoneConnector.addRecipes();
         GameRegistry.registerWorldGenerator(worldGen, 1);
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        // NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 
     @EventHandler

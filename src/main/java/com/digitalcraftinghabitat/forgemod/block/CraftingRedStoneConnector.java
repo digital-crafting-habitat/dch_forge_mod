@@ -1,7 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.block;
 
 import com.digitalcraftinghabitat.forgemod.DigitalCraftingHabitatMod;
-import com.digitalcraftinghabitat.forgemod.GUI.mcreator_iDGUI;
+import com.digitalcraftinghabitat.forgemod.GUI.GUIID;
 import com.digitalcraftinghabitat.forgemod.RefStrings;
 import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import com.digitalcraftinghabitat.forgemod.item.DustCraftium;
@@ -57,7 +57,7 @@ public class CraftingRedStoneConnector extends BlockCompressedPowered implements
                 " id: " + entity.getCustomField() + " att coord : X: " + p_149727_2_ + " Y: :" + p_149727_3_ + " Z: " + p_149727_4_ + ""));
         if (true) {
             if (p_149727_5_ instanceof EntityPlayer)
-                ((EntityPlayer) p_149727_5_).openGui(DigitalCraftingHabitatMod.instance, mcreator_iDGUI.GUIID, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
+                ((EntityPlayer) p_149727_5_).openGui(DigitalCraftingHabitatMod.instance, GUIID.GUIID, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
         }
         //return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
         return true;

@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
  * Created by Rauca on 17.09.2015.
  */
 public class GuiWindow extends GuiContainer {
-    public static int dchId = 1; //TODO static -> non-stetic for every Block
+    public static int dchId = 1; //TODO static -> non-static for every Block
     int i = 0;
     int j = 0;
     int k = 0;
