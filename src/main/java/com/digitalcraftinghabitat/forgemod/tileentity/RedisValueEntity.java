@@ -16,7 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 public class RedisValueEntity extends TileEntity {
     static DatahubClientConnector datahubClientConnector;
 
-    public int customField = GuiWindow.dchId; //TODO GUI
+    public int customField;// = GuiWindow.dchId; //TODO GUI
     private boolean active;
     private int count;
 
@@ -49,13 +49,13 @@ public class RedisValueEntity extends TileEntity {
             }else{
                 DCHLog.info("Custom Field is null");
                 customField = count2++;
-                customField = GuiWindow.dchId; //TODO GUI
+                //customField = GuiWindow.dchId; //TODO GUI
             }
         }
     }
 
     private void processDatahubValue() {
-        customField = GuiWindow.dchId; //TODO GUI
+        //customField = GuiWindow.dchId; //TODO GUI
         String key = "id_" + customField;
         int value = datahubClientConnector.getIntValueForKey(key);
         if (value == 1){
