@@ -1,21 +1,30 @@
 package com.digitalcraftinghabitat.forgemod.tileentity;
 
+import com.digitalcraftinghabitat.forgemod.GUI.GuiWindow;
 import com.digitalcraftinghabitat.forgemod.RefStrings;
-import com.digitalcraftinghabitat.forgemod.block.CraftingRedStoneConnector;
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
+import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 
 /**
  * Created by Rauca on 26.08.2015.
  */
 public class RedisValueEntity extends TileEntity {
-    DatahubClientConnector datahubClientConnector;
-    public int customField;
+    static DatahubClientConnector datahubClientConnector;
 
-    public RedisValueEntity(int customField) {
-        this.customField = customField;
+    public int customField;// = GuiWindow.dchId; //TODO GUI
+    private boolean active;
+    private int count;
+
+    public RedisValueEntity() {
+        if (datahubClientConnector == null){
+            datahubClientConnector = new DatahubClientConnector();
+        }
     }
 
     public static void init() {
@@ -24,35 +33,89 @@ public class RedisValueEntity extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote)
+        if (worldObj.isRemote){
             return;
-        processDatahubValue();
-        worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+        }else{
+            if(customField > 0){
+                if (count >= 25){
+                    boolean oldValue = active;
+                    processDatahubValue();
+                    if (oldValue != active){
+                        DCHLog.info("new Value detected " + active);
+                    }
+                    count = 0;
+                    worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+                }
+                count++;
+            }else{
+                DCHLog.info("Custom Field is null");
+                customField = count2++;
+                //customField = GuiWindow.dchId; //TODO GUI
+            }
+        }
+        setTime();
+    }
+
+    private void setTime() {
+        int time;
+        int lightvalue = datahubClientConnector.getIntValueForKey("light_sensor");
+
+        time = lightvalue * 40;
+
+
+        worldObj.setWorldTime(time);
     }
 
     private void processDatahubValue() {
-        String key = "redstone_value";
+        //customField = GuiWindow.dchId; //TODO GUI
+        String key = "id_" + customField;
+        int value = datahubClientConnector.getIntValueForKey(key);
+        if (value == 1){
+            active = true;
+        }else {
+            active = false;
+        }
+    }
 
-        CraftingRedStoneConnector.isActive = (datahubClientConnector.getIntValueForKey(key) == 1);
+    public boolean isActive (){
+        return active;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound par1)
     {
-        super.writeToNBT(par1);
         par1.setInteger("customField", customField);
+        par1.setBoolean("active", active);
+        super.writeToNBT(par1);
     }
+
+    private static int count2 = 12;
 
     @Override
     public void readFromNBT(NBTTagCompound par1)
     {
-        super.readFromNBT(par1);
-
-        par1.getString("id");
-        par1.getInteger("z");
-        par1.getInteger("z");
-        par1.getInteger("z");
         this.customField = par1.getInteger("customField");
+        if (customField < 1){
+            customField = count2++;
+        }
+        this.active = par1.getBoolean("active");
+        super.readFromNBT(par1);
+    }
+
+    public int getCustomField() {
+        return customField;
+    }
+
+    public void setCustomField(int customField) {
+        this.customField = customField;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.func_148857_g());
     }
 
 }

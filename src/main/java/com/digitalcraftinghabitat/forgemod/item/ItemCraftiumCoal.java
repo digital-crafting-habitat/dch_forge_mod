@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.item;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -15,7 +16,7 @@ public class ItemCraftiumCoal extends Item {
 
     public ItemCraftiumCoal() {
         setUnlocalizedName("craftiumCoal");
-        setCreativeTab(CreativeTabs.tabMisc);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         setTextureName(RefStrings.MODID + ":craftiumCoal");
     }
 
@@ -24,7 +25,7 @@ public class ItemCraftiumCoal extends Item {
     }
 
     public static void addRecipes() {
-        GameRegistry.addRecipe(new ItemStack(ItemCraftiumCoal.craftiumCoal), new Object[]{
+        GameRegistry.addRecipe(new ItemStack(craftiumCoal), new Object[]{
                 " D ",
                 "DCD",
                 " D ",

@@ -1,6 +1,7 @@
 package com.digitalcraftinghabitat.forgemod.item;
 
 import com.digitalcraftinghabitat.forgemod.RefStrings;
+import com.digitalcraftinghabitat.forgemod.core.TabDigitalCraftingHabitat;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -13,7 +14,7 @@ public class DustCraftium extends Item {
 
     public DustCraftium() {
         setUnlocalizedName("dustCraftium");
-        setCreativeTab(CreativeTabs.tabMisc);
+        setCreativeTab(TabDigitalCraftingHabitat.tab);
         setTextureName(RefStrings.MODID + ":craftium_dust");
     }
 

@@ -1,7 +1,7 @@
 [
 {
   "modid": "digitalcraftinghabitat",
-  "name": "Digital Crafting Habitat Forge Mod",
+  "name": "Digital Crafting Habitat",
   "description": "This Mod is for the Digital Crafting Habitat Session to connect Minecraft Servers with the real world.",
   "version": "${version}",
   "mcversion": "${mcversion}",
