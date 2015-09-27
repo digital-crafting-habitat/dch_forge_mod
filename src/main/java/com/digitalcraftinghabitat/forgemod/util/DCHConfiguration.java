@@ -14,7 +14,7 @@ public class DCHConfiguration {
     public static final String JEDIS_URL_DEFAULT = "85.214.235.74";
     public static final String JEDIS_AUTH_DEFAULT = "DCH-Rocks-2015@";
     private static final String JEDIS_PREFIX = "jedis_prefix";
-    private static final String JEDIS_PREFIX_DEFAULT = "dev";
+    private static final String JEDIS_PREFIX_DEFAULT = "dev_";
     private String jedisAuth;
     private Configuration config;
     private static DCHConfiguration instance;

@@ -18,27 +18,30 @@ public class ControllerRefreshThread implements Runnable{
 
     DCHConfiguration dchConfiguration;
     ValueUpdateEvent valueUpdateEvent;
+    DatahubClientConnector connector;
+    ScanParams scanParams;
     private World world;
+    private static boolean run = false;
     static Thread runner;
 
     public ControllerRefreshThread(World world) {
         this.world = world;
         dchConfiguration = DCHConfiguration.getInstance();
+        connector = new DatahubClientConnector(dchConfiguration);
+        run = true;
     }
 
 
 
     @Override
     public void run() {
-        DatahubClientConnector connector = new DatahubClientConnector();
         int keyValue;
-        ScanParams params = new ScanParams();
+        while (run) {
 
-        params.match(dchConfiguration.getJedis_prefix() + "*");
-
-        ScanResult<String> scanResult = connector.getJedis().scan("0", params);
-        List<String> keys = scanResult.getResult();
-        while (true) {
+            scanParams = new ScanParams();
+            scanParams.match(dchConfiguration.getJedis_prefix() + "*");
+            ScanResult<String> scanResult = connector.getJedis().scan("0", scanParams);
+            List<String> keys = scanResult.getResult();
 
             Iterator<String> keyIterator = keys.iterator();
 
@@ -62,10 +65,21 @@ public class ControllerRefreshThread implements Runnable{
     }
 
     public static void init(World world) {
-        if (runner != null){
+        if (world.isRemote){
+            return;
+        }
+        if (runner == null){
             runner = new Thread(new ControllerRefreshThread(world));
             runner.start();
         }
+    }
+
+    public static void kill(World world) {
+        if (world.isRemote){
+            return;
+        }
+        run = false;
+        runner = null;
     }
 }
 

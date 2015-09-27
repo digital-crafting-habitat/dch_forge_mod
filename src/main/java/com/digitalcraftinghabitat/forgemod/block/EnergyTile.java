@@ -3,9 +3,12 @@ package com.digitalcraftinghabitat.forgemod.block;
 import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
+import com.digitalcraftinghabitat.forgemod.event.consumer.ValueUpdateEvent;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +20,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.io.IOException;
 
 /**
  * Created by christopher on 11/08/15.
@@ -53,6 +58,7 @@ public class EnergyTile extends TileEntity implements IInventory , IEnergyHandle
     public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
         DCHLog.info("setInventorySlotContents");
     }
+
 
     @Override
     public String getInventoryName() {
@@ -94,6 +100,8 @@ public class EnergyTile extends TileEntity implements IInventory , IEnergyHandle
         super.setWorldObj(p_145834_1_);
         MinecraftForge.EVENT_BUS.post((Event) new EnergyTileLoadEvent(this));
     }
+
+
 
     @Override
     public void writeToNBT(NBTTagCompound par1) {
@@ -145,7 +153,7 @@ public class EnergyTile extends TileEntity implements IInventory , IEnergyHandle
 
     @Override
     public double getOfferedEnergy() {
-        return 20;
+        return 5;
     }
 
     @Override
@@ -158,4 +166,7 @@ public class EnergyTile extends TileEntity implements IInventory , IEnergyHandle
         return 1;
     }
 
+    public void onDestroyed() {
+        MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+    }
 }

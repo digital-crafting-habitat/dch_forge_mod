@@ -3,13 +3,19 @@ package com.digitalcraftinghabitat.forgemod.tileentity;
 import com.digitalcraftinghabitat.forgemod.GUI.GuiWindow;
 import com.digitalcraftinghabitat.forgemod.RefStrings;
 import com.digitalcraftinghabitat.forgemod.datahub.client.DatahubClientConnector;
+import com.digitalcraftinghabitat.forgemod.event.consumer.ValueUpdateEvent;
+import com.digitalcraftinghabitat.forgemod.util.DCHConfiguration;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
+
+import java.io.IOException;
 
 /**
  * Created by Rauca on 26.08.2015.
@@ -17,12 +23,12 @@ import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 public class RedisValueEntity extends TileEntity {
     static DatahubClientConnector datahubClientConnector;
 
-    public int customField;// = GuiWindow.dchId; //TODO GUI
+    public String customField;// = GuiWindow.dchId; //TODO GUI
     private boolean active;
     private int count;
 
     public RedisValueEntity() {
-        if (datahubClientConnector == null){
+        if (datahubClientConnector == null) {
             datahubClientConnector = new DatahubClientConnector();
         }
     }
@@ -33,27 +39,38 @@ public class RedisValueEntity extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote){
+        if (worldObj.isRemote) {
             return;
-        }else{
-            if(customField > 0){
-                if (count >= 25){
-                    boolean oldValue = active;
-                    processDatahubValue();
-                    if (oldValue != active){
-                        DCHLog.info("new Value detected " + active);
-                    }
-                    count = 0;
-                    worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
-                }
-                count++;
-            }else{
+        } else {
+            if ((customField == null) || (customField.length() == 0)) {
                 DCHLog.info("Custom Field is null");
-                customField = count2++;
+                customField = DCHConfiguration.getInstance().getJedis_prefix() + count2++;
+                MinecraftForge.EVENT_BUS.register(this);
                 //customField = GuiWindow.dchId; //TODO GUI
             }
         }
         setTime();
+    }
+
+
+    @SubscribeEvent
+    public void onCommand(ValueUpdateEvent tce) throws IOException {
+        if (tce.getId().equals(customField)) {
+            DCHLog.info("get Event with id: " + tce.getId() + " value:" + tce.getValue());
+
+            boolean oldValue = active;
+
+            if (tce.getValue() == 1) {
+                active = true;
+            } else {
+                active = false;
+            }
+
+            if (oldValue != active) {
+                DCHLog.info("new Value detected " + active);
+                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+            }
+        }
     }
 
     private void setTime() {
@@ -61,30 +78,16 @@ public class RedisValueEntity extends TileEntity {
         int lightvalue = datahubClientConnector.getIntValueForKey("light_sensor");
 
         time = lightvalue * 40;
-
-
         worldObj.setWorldTime(time);
     }
 
-    private void processDatahubValue() {
-        //customField = GuiWindow.dchId; //TODO GUI
-        String key = "id_" + customField;
-        int value = datahubClientConnector.getIntValueForKey(key);
-        if (value == 1){
-            active = true;
-        }else {
-            active = false;
-        }
-    }
-
-    public boolean isActive (){
+    public boolean isActive() {
         return active;
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1)
-    {
-        par1.setInteger("customField", customField);
+    public void writeToNBT(NBTTagCompound par1) {
+        par1.setString("customField", customField);
         par1.setBoolean("active", active);
         super.writeToNBT(par1);
     }
@@ -92,21 +95,21 @@ public class RedisValueEntity extends TileEntity {
     private static int count2 = 12;
 
     @Override
-    public void readFromNBT(NBTTagCompound par1)
-    {
-        this.customField = par1.getInteger("customField");
-        if (customField < 1){
-            customField = count2++;
+    public void readFromNBT(NBTTagCompound par1) {
+        this.customField = par1.getString("customField");
+        if ((customField == null) || (customField.length() == 0)) {
+            customField = DCHConfiguration.getInstance().getJedis_prefix() + count2++;
         }
+        MinecraftForge.EVENT_BUS.register(this);
         this.active = par1.getBoolean("active");
         super.readFromNBT(par1);
     }
 
-    public int getCustomField() {
+    public String getCustomField() {
         return customField;
     }
 
-    public void setCustomField(int customField) {
+    public void setCustomField(String customField) {
         this.customField = customField;
     }
 

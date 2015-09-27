@@ -13,18 +13,30 @@ import java.util.List;
  */
 public class DatahubClientConnector {
 
+    DCHConfiguration dchConfiguration;
+
     public Jedis getJedis() {
         return jedis;
     }
 
-    public void setJedis(Jedis jedis) {
-        this.jedis = jedis;
-    }
-
     private Jedis jedis;
 
+    public DatahubClientConnector(DCHConfiguration dchConfiguration) {
+        if (dchConfiguration != null){
+            initJedis(dchConfiguration);
+        }
+        else {
+            throw new IllegalArgumentException("config is null");
+        }
+
+    }
+
     public DatahubClientConnector() {
-        DCHConfiguration dchConfiguration = DCHConfiguration.getInstance();
+        dchConfiguration = DCHConfiguration.getInstance();
+        initJedis(dchConfiguration);
+    }
+
+    private void initJedis(DCHConfiguration dchConfiguration) {
         jedis = new Jedis(dchConfiguration.getJedisUrl());
         jedis.auth(dchConfiguration.getJedisAuth());
         //jedis = new Jedis("192.168.99.100", 32768);
@@ -33,6 +45,7 @@ public class DatahubClientConnector {
         jedis.getClient().setSoTimeout(40000);
         jedis.getClient().setConnectionTimeout(40000);
     }
+
 
     public String getSringValueForKey(String key) {
         return "demoString";

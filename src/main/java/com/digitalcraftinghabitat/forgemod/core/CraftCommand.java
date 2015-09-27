@@ -49,7 +49,7 @@ public class CraftCommand implements ICommand {
                         RedisValueEntity redisValueEntity = (RedisValueEntity) sender.getEntityWorld().getTileEntity(x, y, z);
                         if ((commandParams[4] != null) && (!commandParams[4].isEmpty())) {
                             try {
-                                redisValueEntity.setCustomField(Integer.parseInt(commandParams[4]));
+                                redisValueEntity.setCustomField(commandParams[4]);
                                 DCHLog.warning("set new id " + commandParams[4] + " to entity");
                             } catch (NumberFormatException e) {
                                 DCHLog.error(e);

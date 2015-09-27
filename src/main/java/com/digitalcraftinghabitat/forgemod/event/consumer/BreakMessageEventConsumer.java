@@ -18,11 +18,5 @@ public class BreakMessageEventConsumer {
         }
     }*/
 
-    @SubscribeEvent
-    public void onCommand(ValueUpdateEvent tce) throws IOException {
-        if (tce.getId().equals("id_12")){
-            DCHLog.info("get Event with id: " + tce.getId() + " value:" + tce.getValue());
-        }
-    }
 
 }
