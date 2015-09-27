@@ -19,6 +19,9 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.living.LivingEvent;
+
+import java.io.File;
 
 @Mod(modid = RefStrings.MODID, version = RefStrings.VERSION)
 public class DigitalCraftingHabitatMod {
@@ -37,12 +40,18 @@ public class DigitalCraftingHabitatMod {
         BlockController.register();
         OreCraftium.register();
         CraftingRedStoneConnector.register();
-        dchConfiguration = DCHConfiguration.getInstanceWithFile(event.getSuggestedConfigurationFile());
-        DCHLog.info(dchConfiguration.getConfig().getCategoryNames().toString());
-        String someString = dchConfiguration.getConfig()
-                .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
-        DCHLog.info(someString);
+        initConfiguration(event.getSuggestedConfigurationFile());
         worldGen = new WorldGen();
+    }
+
+    private void initConfiguration(File suggestedConfigurationFile) {
+        if (suggestedConfigurationFile != null){
+            dchConfiguration = DCHConfiguration.getInstanceWithFile(suggestedConfigurationFile);
+            DCHLog.info(dchConfiguration.getConfig().getCategoryNames().toString());
+            String someString = dchConfiguration.getConfig()
+                    .get(Configuration.CATEGORY_GENERAL, "redstoneID", "nothing").getString();
+            DCHLog.info(someString);
+        }
     }
 
     @EventHandler
@@ -68,6 +77,15 @@ public class DigitalCraftingHabitatMod {
 
     @EventHandler
     public void registerCommands(FMLServerStartingEvent event) {
+
         event.registerServerCommand(new CraftCommand());
+
     }
+
+    @EventHandler
+    public void makeJumpHigher(LivingEvent.LivingJumpEvent event) {
+        event.entity.motionY *= 5;
+        DCHLog.warning("set new id superjump");
+    }
+
 }

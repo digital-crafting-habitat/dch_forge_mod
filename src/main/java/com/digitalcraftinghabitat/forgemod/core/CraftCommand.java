@@ -1,10 +1,12 @@
 package com.digitalcraftinghabitat.forgemod.core;
 
+import com.digitalcraftinghabitat.forgemod.event.consumer.ValueUpdateEvent;
 import com.digitalcraftinghabitat.forgemod.tileentity.RedisValueEntity;
 import com.digitalcraftinghabitat.forgemod.util.DCHLog;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,22 +35,22 @@ public class CraftCommand implements ICommand {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] p_71515_2_) {
-        if ((p_71515_2_ != null) && (p_71515_2_.length > 4)) {
-            if (p_71515_2_[0].equals("set_id")) {
+    public void processCommand(ICommandSender sender, String[] commandParams) {
+        if ((commandParams != null) && (commandParams.length > 4)) {
+            if (commandParams[0].equals("set_id")) {
                 DCHLog.warning("set id called");
-                DCHLog.warning("coords X: " + p_71515_2_[1] + " Y: " + p_71515_2_[2] + " Z: " + p_71515_2_[3]);
-                int x = Integer.parseInt(p_71515_2_[1]);
-                int y = Integer.parseInt(p_71515_2_[2]);
-                int z = Integer.parseInt(p_71515_2_[3]);
+                DCHLog.warning("coords X: " + commandParams[1] + " Y: " + commandParams[2] + " Z: " + commandParams[3]);
+                int x = Integer.parseInt(commandParams[1]);
+                int y = Integer.parseInt(commandParams[2]);
+                int z = Integer.parseInt(commandParams[3]);
                 TileEntity tileEntity = sender.getEntityWorld().getTileEntity(x, y, z);
                 if ((tileEntity != null) && (tileEntity instanceof RedisValueEntity)) {
                     try {
                         RedisValueEntity redisValueEntity = (RedisValueEntity) sender.getEntityWorld().getTileEntity(x, y, z);
-                        if ((p_71515_2_[4] != null) && (!p_71515_2_[4].isEmpty())) {
+                        if ((commandParams[4] != null) && (!commandParams[4].isEmpty())) {
                             try {
-                                redisValueEntity.setCustomField(Integer.parseInt(p_71515_2_[4]));
-                                DCHLog.warning("set new id " + p_71515_2_[4] + " to entity");
+                                redisValueEntity.setCustomField(Integer.parseInt(commandParams[4]));
+                                DCHLog.warning("set new id " + commandParams[4] + " to entity");
                             } catch (NumberFormatException e) {
                                 DCHLog.error(e);
                             }
@@ -63,6 +65,12 @@ public class CraftCommand implements ICommand {
                 }
 
             }
+        }
+        else{
+            ValueUpdateEvent valueUpdateEvent = new ValueUpdateEvent(sender.getEntityWorld());
+            valueUpdateEvent.setValue(42);
+            MinecraftForge.EVENT_BUS.post(valueUpdateEvent);
+            System.out.println("bkad");
         }
     }
 

@@ -13,6 +13,14 @@ import java.util.List;
  */
 public class DatahubClientConnector {
 
+    public Jedis getJedis() {
+        return jedis;
+    }
+
+    public void setJedis(Jedis jedis) {
+        this.jedis = jedis;
+    }
+
     private Jedis jedis;
 
     public DatahubClientConnector() {
